@@ -9,7 +9,7 @@ const router = useRouter()
 const booksStore = useBooksStore()
 const books= booksStore.books
 const wishlistStore = useWishlistStore ()
-wishlistStore.addToWishlist(book)
+// wishlistStore.addToWishlist(book)
 
 function view(book){
    booksStore.updateSelectedBook(book) // keep track of the selected item
