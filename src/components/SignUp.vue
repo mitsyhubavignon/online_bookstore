@@ -1,5 +1,11 @@
 <script setup >
 import { ref } from 'vue'
+import {useAuth} from '../services/auth'
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+
+const { signup } = useAuth()
 
 const showPassword = ref(false)
 const password = ref(null) 
@@ -28,13 +34,13 @@ const rules = {
         phone: phone.value,
         location: location.value,
         address: address.value,
-        paasword: password.value
+        paasword: password.value,
+        role : 2,
     }
-    try{
-        localStorage.setItem("user",JSON.stringify(data))
-    }catch{
-        console.log("Error signing up")
-    }
+    signup(data)
+        // router.push('/').then(() => {
+        //     router.go(0)
+        // });
   }
 </script>
 
@@ -43,7 +49,10 @@ const rules = {
     <v-row>
         <v-col>
             <v-card max-width="80%" class="bg-primary">
-                <v-form class="mt-12 mb-6">
+                <v-img src="/Logo.png" height="150 " width="260" class="mt-4"></v-img>
+                <v-card-title class="ma-5">Sign Up</v-card-title>
+                <v-divider></v-divider>
+                <v-form class="mt-12 mb-6">  
                     <v-row>
                         <v-col md="3">
                             <div> First Name</div>
@@ -122,7 +131,7 @@ const rules = {
 
 
                     <v-row>
-                        <v-btn :@click="register()">Sign Up</v-btn>
+                        <v-btn :@click="register()" block>Sign Up</v-btn>
                         <v-col md="6">
                         
                         </v-col>
@@ -131,6 +140,7 @@ const rules = {
                          <v-col md="6">
                             <div>
                                 Already have an account?
+                                <router-link to="/login">Login</router-link>
                         
 
                             </div>
